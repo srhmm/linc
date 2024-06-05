@@ -28,7 +28,7 @@ def gen_bivariate_example() -> [SimpleNamespace, SimpleNamespace]:
     arcs: DAG = cd.rand.directed_erdos((params["N"]), 0)
     weights: GaussDAG = cd.rand.rand_weights(arcs)
     weights.set_arc_weight(0, 1, 1)
-    data_c, dag, weights, is_true_edge = gen_context_data(
+    data_c, dag, gauss_dag, weights, is_true_edge = gen_context_data(
         options, params, SeedSequence(options.seed).spawn(100), given_dag=weights
     )
     data = SimpleNamespace(data_c=data_c, sim=DataSimulator.OURS)

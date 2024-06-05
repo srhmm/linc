@@ -9,5 +9,5 @@ if __name__ == "__main__":
     causal = score_edge(data.data_c, gp_hyperparams, [cause], effect, None, 0)
     acausal = score_edge(data.data_c, gp_hyperparams, [effect], cause, None, 0)
     print(
-        f"Causal dir. {causal:.2} {'<' if causal < acausal else '>'} anticausal dir. {acausal:.2f} "
+        f"Causal dir. {causal:.2f} {'<' if causal < acausal else '>'} anticausal dir. {acausal:.2f} "
     )
