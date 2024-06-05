@@ -9,7 +9,7 @@ from gpcd.gp_fourier_features_mdl import FourierType, GP_Fourier_Features_MDL
 from gpcd.other.util import data_scale
 
 
-# from testing.gen import gen_bivariate_example
+# from .testing.gen import gen_bivariate_example
 
 
 # todo add discrepancy gen.py step/local minimization

@@ -1,5 +1,5 @@
 from gpcd.scoring import ScoreType, GPType, GPParams, score_edge
-from testing.gen import gen_demo_example, gen_bivariate_example
+from .testing.gen import gen_demo_example, gen_bivariate_example
 
 if __name__ == "__main__":
     data, truths, params, options = gen_demo_example()

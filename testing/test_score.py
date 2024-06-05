@@ -4,7 +4,7 @@ import pytest
 
 from gpcd.gp_fourier_features_mdl import FourierType
 from gpcd.scoring import GPType, ScoreType, GPParams, score_edge
-from testing.gen import gen_bivariate_example
+from .testing.gen import gen_bivariate_example
 
 
 @pytest.fixture()
