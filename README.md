@@ -16,7 +16,7 @@ pip install -r requirements.txt
 ```
 
 ### Demo 
-Bivariate Case
+- Bivariate Case
 ```
 from gpcd.scoring import ScoreType, GPType, GPParams, score_edge
 from testing.gen import gen_bivariate_example
@@ -39,12 +39,13 @@ print(
 ```
 Causal dir. 108.73 < anticausal dir. 1140.42 
 ```
-Gene expression data simulated with SERGIO (Dibaeinia and Sinha, 2020)
+- Gene expression data simulated with SERGIO (Dibaeinia and Sinha, 2020)
 ```
 data, truths, params, options = gen_sergio_data()
 options.exp_type = ExpType.MEC
 print(
-    f"SERGIO: {params['C']} experimental conditions over {params['N']} genes\nKnockout interventions (latent): "
+    f"SERGIO: {params['C']} experimental conditions over {params['N']} genes
+    f"\nKnockout interventions (latent): "
     f"{', '.join(['Gene ' + str(tgt[0]) + ' in condition ' + str(i) for i, tgt in enumerate(truths.targets)])} "
 )
 
