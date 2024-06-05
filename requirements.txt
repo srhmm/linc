@@ -10,3 +10,6 @@ causaldag~=0.1a163
 typing~=3.7.4.3
 hyppo~=0.4.0
 pytest~=8.2.2
+causaldag
+cdt
+causal-learn
