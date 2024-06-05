@@ -1,6 +1,0 @@
-X	LINC_rff_Recall	LINC_rff_Recall_std	LINC_rff_Recall_cnf	LINC_gp_Recall	LINC_gp_Recall_std	LINC_gp_Recall_cnf	MSS_KCI_Recall	MSS_KCI_Recall_std	MSS_KCI_Recall_cnf	Pooled_PC_KCI_Recall	Pooled_PC_KCI_Recall_std	Pooled_PC_KCI_Recall_cnf	MC_Recall	MC_Recall_std	MC_Recall_cnf
-2	0.7	0.47	0.206	0.95	0.224	0.098	na	na	na	na	na	na	na	na	na
-3	0.983	0.075	0.033	0.883	0.249	0.154	0.75	0.417	0.183	0.75	0.417	0.183	0.6	0.479	0.21
-6	0.854	0.189	0.037	0.806	0.238	0.104	0.754	0.235	0.083	0.801	0.236	0.085	0.751	0.204	0.073
-9	0.905	0.1	0.044	0.859	0.176	0.109	0.919	0.108	0.067	0.917	0.112	0.069	0.847	0.146	0.09
-12	0.925	0.054	0.024	0.914	0.058	0.036	0.961	0.039	0.024	0.962	0.039	0.024	0.938	0.067	0.041
