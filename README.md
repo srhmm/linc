@@ -41,6 +41,10 @@ Causal dir. 108.73 < anticausal dir. 1140.42
 ```
 - Gene expression data simulated with SERGIO (Dibaeinia and Sinha, 2020)
 ```
+from exp.exptypes import ExpType
+from exp.methods import LincMethod, LincQFFMethod, LincRFFMethod
+from testing.gen import gen_sergio_data
+
 data, truths, params, options = gen_sergio_data()
 options.exp_type = ExpType.MEC
 print(
