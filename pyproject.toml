@@ -1,0 +1,12 @@
+[tool.poetry]
+name = "gpcd"
+version = "0.1.0"
+description = "Causal Discovery with GPs"
+authors = ["Sarah Mameche <sarah.mameche@cispa.de>"]
+license = "MIT license"
+readme = "README.md"
+requires-python = '>=3.8'
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
