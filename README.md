@@ -1,7 +1,6 @@
 # Causal Dicovery with GPs
 [![compat](https://github.com/srhmm/linc/actions/workflows/compat.yml/badge.svg)](https://github.com/srhmm/linc/actions/workflows/compat.yml)
-[![test](https://github.com/srhmm/linc/actions/workflows/test.yml/badge.svg)](https://github.com/srhmm/linc/actions/workflows/test.yml)
-![Static Badge](https://img.shields.io/badge/python-%3E%3D3.8-blue?logo=python&label=python)
+![Static Badge](https://img.shields.io/badge/python-%3E%3D3.9-blue?logo=python&label=python)
 [![license](https://img.shields.io/github/license/machine-teaching-group/checkmate.svg)](https://github.com/srhmm/coco/blob/main/LICENSE)
 <a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
 
