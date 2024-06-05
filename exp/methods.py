@@ -1,4 +1,5 @@
 import warnings
+import time
 
 import cdt.causality.graph as algs
 import networkx
@@ -6,6 +7,7 @@ import networkx as nx
 import pandas as pd
 from causallearn.search.ConstraintBased.PC import pc
 
+from exp.exptypes import DataSimulator
 from exp.methodtypes import ContextMethod, ContinuousMethod
 from gpcd.gp_fourier_features_mdl import FourierType
 from gpcd.greedy_dag_search import dag_search
@@ -21,19 +23,24 @@ class LincMethod(ContextMethod):
     def fit(self, data, truths, params, options):
         super(LincMethod, self).check_data(data, truths, params)
 
-        gp_params: GPParams = GPParams(ScoreType.GP, GPType.EXACT, None, None, None)
-
+        self._gp_params: GPParams = GPParams(
+            ScoreType.GP, GPType.EXACT, None, None, None
+        )
+        st = time.perf_counter()
         adj, _obj = dag_search(
             options.exp_type,
             truths,
             data.data_c,
-            gp_params,
+            self._gp_params,
             options.logger,  # todo or dag logger
             options.verbosity,
         )
+        self.fit_times.append(time.perf_counter() - st)
         self.graph = adj
         self._scores = _obj  # may not contain any edges if it was used in exhaustive search to traverse different dags.
-        super(LincMethod, self).eval_results(self, truths, options.logger)
+        super(LincMethod, self).eval_results(
+            truths, options.logger, tsp=not data.sim == DataSimulator.SERGIO
+        )
 
 
 class LincQFFMethod(ContextMethod):
@@ -43,20 +50,28 @@ class LincQFFMethod(ContextMethod):
 
     def fit(self, data, truths, params, options):
         super(LincQFFMethod, self).check_data(data, truths, params)
-        gp_params = GPParams(
-            ScoreType.GP, GPType.FOURIER, FourierType.QUADRATURE, 100, None
+        self._gp_params = GPParams(
+            ScoreType.GP,
+            GPType.FOURIER,
+            FourierType.QUADRATURE,
+            options.n_components,
+            None,
         )
+        st = time.perf_counter()
         adj, _obj = dag_search(
             options.exp_type,
             truths,
             data.data_c,
-            gp_params,
+            self._gp_params,
             options.logger,
             options.verbosity,
         )
+        self.fit_times.append(time.perf_counter() - st)
         self.graph = adj
         self._scores = _obj  # may not contain any edges if it was used in exhaustive search to traverse different dags.
-        super(LincQFFMethod, self).eval_results(self, truths, options.logger)
+        super(LincQFFMethod, self).eval_results(
+            truths, options.logger, tsp=not data.sim == DataSimulator.SERGIO
+        )
 
 
 class LincRFFMethod(ContextMethod):
@@ -66,20 +81,24 @@ class LincRFFMethod(ContextMethod):
 
     def fit(self, data, truths, params, options):
         super(LincRFFMethod, self).check_data(data, truths, params)
-        gp_params = GPParams(
-            ScoreType.GP, GPType.FOURIER, FourierType.RANDOM, None, 200
+        self._gp_params = GPParams(
+            ScoreType.GP, GPType.FOURIER, FourierType.RANDOM, None, options.n_components
         )
+        st = time.perf_counter()
         adj, _obj = dag_search(
             options.exp_type,
             truths,
             data.data_c,
-            gp_params,
+            self._gp_params,
             options.logger,
             options.verbosity,
         )
+        self.fit_times.append(time.perf_counter() - st)
         self.graph = adj
         self._scores = _obj  # may not contain any edges if it was used in exhaustive search to traverse different dags.
-        super(LincRFFMethod, self).eval_results(self, truths, options.logger)
+        super(LincRFFMethod, self).eval_results(
+            truths, options.logger, tsp=not data.sim == DataSimulator.SERGIO
+        )
 
 
 ##Continuous methods
@@ -96,7 +115,7 @@ class CAMMethod(ContinuousMethod):
         data = pd.DataFrame(data)
         self.untimed_graph = obj.predict(data)
         self.top_order = list(nx.topological_sort(self.untimed_graph))
-        super(CAMMethod, self).eval_results(self, truths, options.logger)
+        super(CAMMethod, self).eval_results(truths, options.logger)
 
 
 class GESMethod(ContinuousMethod):
@@ -110,7 +129,7 @@ class GESMethod(ContinuousMethod):
         data = pd.DataFrame(data)
         self.untimed_graph = obj.predict(data)
         self.top_order = list(nx.topological_sort(self.untimed_graph))
-        super(GESMethod, self).eval_results(self, truths, options.logger)
+        super(GESMethod, self).eval_results(truths, options.logger)
 
 
 class PCMethod(ContinuousMethod):
@@ -129,7 +148,7 @@ class PCMethod(ContinuousMethod):
         except networkx.exception.NetworkXUnfeasible:
             self.top_order = []
             warnings.warn(f" exception {networkx.exception.NetworkXUnfeasible}")
-        super(PCMethod, self).eval_results(self, truths, options.logger)
+        super(PCMethod, self).eval_results(truths, options.logger)
 
 
 class GLOBEMethod(ContinuousMethod):
@@ -147,7 +166,7 @@ class GLOBEMethod(ContinuousMethod):
         graph = nx.from_numpy_array(adjacency, create_using=nx.DiGraph())
         self.untimed_graph = graph
         self.top_order = list(nx.topological_sort(self.untimed_graph))
-        super(GLOBEMethod, self).eval_results(self, truths, options.logger)
+        super(GLOBEMethod, self).eval_results(truths, options.logger)
 
 
 ##Time Series methods

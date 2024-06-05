@@ -13,8 +13,26 @@ from exp.util.sample_ours import gen_context_data
 
 def gen_demo_example() -> [SimpleNamespace, SimpleNamespace]:
     f = FunType.TAYLOR
+    dsim = DataSimulator.OURS
+    params = {"C": 2, "N": 3, "S": 500, "I": 1, "F": f.to_fun(), "Dsim": dsim}
+    options = gen_demo_options(params["C"], params["N"], params["S"], f, dsim)
+    data, truths = gen_data(options, params, SeedSequence(options.seed), options.seed)
+    return data, truths, params, options
+
+
+def gen_multivariate_example() -> [SimpleNamespace, SimpleNamespace]:
+    f = FunType.TAYLOR
+    dsim = DataSimulator.OURS
+    params = {"C": 3, "N": 5, "S": 500, "I": 1, "F": f.to_fun(), "Dsim": dsim}
+    options = gen_demo_options(params["C"], params["N"], params["S"], f, dsim)
+    data, truths = gen_data(options, params, SeedSequence(options.seed), options.seed)
+    return data, truths, params, options
+
+
+def gen_sergio_data() -> [SimpleNamespace, SimpleNamespace]:
     dsim = DataSimulator.SERGIO
-    params = {"C": 2, "N": 3, "S": 500, "I": 1, "F": f.to_fun()}
+    f = None  # no functional form needed
+    params = {"C": 5, "N": 5, "S": 500, "I": 1, "F": None, "Dsim": dsim}
     options = gen_demo_options(params["C"], params["N"], params["S"], f, dsim)
     data, truths = gen_data(options, params, SeedSequence(options.seed), options.seed)
     return data, truths, params, options

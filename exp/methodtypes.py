@@ -25,8 +25,8 @@ class MethodType(ABC):
 class ContextMethod(MethodType, ABC):
     def __init__(self):
         self.metrics = {}
-        self.untimed_graph = nx.DiGraph()
-        self.top_order = []
+        self.graph = nx.DiGraph()
+        self.fit_times = []
 
     @staticmethod
     def check_data(data, truths, params):
@@ -41,9 +41,9 @@ class ContextMethod(MethodType, ABC):
     def valid_data_type():
         return DataType.CONT_MCONTEXT
 
-    def eval_results(self, truths, logger):
+    def eval_results(self, truths, logger, tsp=True):
         self.metrics = {}
-        super(ContextMethod, self).eval_graph(self, truths, logger)
+        super(ContextMethod, self).eval_graph(truths, logger, tsp)
 
 
 class ContinuousMethod(MethodType, ABC):

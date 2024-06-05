@@ -63,7 +63,7 @@ def gen_data(
             n_interv_obs=params["S"],
             n_intervention_sets=params["C"] - 1,
         )
-        data_c = [None for _ in range(params["C"])]
+        data_c = dict.fromkeys(set(range(params["C"])))
         data_c[0] = tgt.x
         for c_i in range(params["C"] - 1):
             data_c[c_i + 1] = tgt.x_interv_data[tgt.envs == c_i]

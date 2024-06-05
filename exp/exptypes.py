@@ -10,6 +10,9 @@ class ExpType(Enum):
     def __eq__(self, other):
         return self.value == other.value
 
+    def __def__(self, other):
+        return ["exhaustive_given_MEC", "greedy_DAG_search"][self.value]
+
 
 class DataSimulator(Enum):
     OURS = 0

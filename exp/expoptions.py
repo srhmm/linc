@@ -26,7 +26,7 @@ class ExpOptions:
         self.methods = [
             m for m in self.methods
         ]  # if m.valid_exp_type() == self.exp_type]
-        self.functions_F = [f.to_fun() for f in self.functions_F]
+        self.functions_F = [f.to_fun() for f in self.functions_F if f is not None]
 
         # quick debug experiment
         self.reps = min(self.reps, 3) if self.quick else self.reps
